@@ -801,7 +801,7 @@
 
 						// columns at index 1
 						var searchTerm = afnSearch_[j]();
-						aoData[1].value[index].search.value = (searchTerm == "~" ? '' : searchTerm);
+						aoData[1].value[index].search.value = (searchTerm == properties.sRangeSeparator ? '' : searchTerm);
 					}
 					aoData.push({ "name": "sRangeSeparator", "value": properties.sRangeSeparator });
 
