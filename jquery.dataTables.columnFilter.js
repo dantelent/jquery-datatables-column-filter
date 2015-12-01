@@ -1,8 +1,11 @@
 ﻿/*
 * File:        jquery.dataTables.columnFilter.js
-* Version:     1.5.6.
-* Author:      Jovan Popovic 
+* Version:     1.0.0
+* Author:      Dan Beavon
 * 
+* This is a derivative work based on jquery.dataTables.columnFilter.js version 1.5.6 by Jovan Popovic
+* 
+* Copyright 2015 telent Techology Services LTD, all rights reserved.
 * Copyright 2011-2014 Jovan Popovic, all rights reserved.
 *
 * This source file is free software, under either the GPL v2 license or a
