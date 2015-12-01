@@ -13,7 +13,7 @@
 * or FITNESS FOR A PARTICULAR PURPOSE. 
 * 
 * Parameters:"
-* @sPlaceHolder                 String      Place where inline filtering function should be placed ("tfoot", "thead:before", "thead:after"). Default is "tfoot"
+* @sPlaceHolder                 String      Place where inline filtering function should be placed ("tfoot", "head:before", "head:after"). Default is "tfoot"
 * @sRangeSeparator              String      Separator that will be used when range values are sent to the server-side. Default value is "~".
 * @sRangeFormat                 string      Default format of the From ... to ... range inputs. Default is From {from} to {to}
 * @aoColumns                    Array       Array of the filter settings that will be applied on the columns
@@ -678,15 +678,14 @@
 
 			if (properties.sPlaceHolder == "head:after") {
 				var tr = $("tr:first", oTable.fnSettings().nTHead).detach();
-				//tr.appendTo($(oTable.fnSettings().nTHead));
+				var filters = $("tr:first", oHost).detach();
+
 				if (oTable.fnSettings().bSortCellsTop) {
 					tr.prependTo($(oTable.fnSettings().nTHead));
-					//tr.appendTo($("thead", oTable));
-					aoFilterCells = oTable.fnSettings().aoHeader[1];
+					filters.prependTo($(oTable.fnSettings().nTHead));
 				}
 				else {
 					tr.appendTo($(oTable.fnSettings().nTHead));
-					//tr.prependTo($("thead", oTable));
 					aoFilterCells = oTable.fnSettings().aoHeader[0];
 				}
 
@@ -702,19 +701,12 @@
 				} else {
 					aoFilterCells = oTable.fnSettings().aoHeader[0];
 				}
-				/*else {
-                //tr.prependTo($("thead", oTable));
-                sFilterRow = "tr:first";
-                }*/
+				
 
 				sFilterRow = "tr:first";
-
 				oHost = oTable.fnSettings().nTHead;
-
-
 			}
 
-			//$(sFilterRow + " th", oHost).each(function (index) {//bug with ColVis
 			$(aoFilterCells).each(function (index) {//fix for ColVis
 				i = index;
 				var aoColumn = {
@@ -729,10 +721,8 @@
 						return;
 					aoColumn = properties.aoColumns[i];
 				}
-				//label = $(this).text(); //Before fix for ColVis
 				label = $($(this)[0].cell).text(); //Fix for ColVis
 				if (aoColumn.sSelector == null) {
-					//th = $($(this)[0]);//Before fix for ColVis
 					th = $($(this)[0].cell); //Fix for ColVis
 				}
 				else {
@@ -782,7 +772,6 @@
 			});
 
 			for (j = 0; j < aiCustomSearch_Indexes.length; j++) {
-				//var index = aiCustomSearch_Indexes[j];
 				var fnSearch_ = function () {
 					var id = oTable.attr("id");
 					return $("#" + id + "_range_from_" + aiCustomSearch_Indexes[j]).val() + properties.sRangeSeparator + $("#" + id + "_range_to_" + aiCustomSearch_Indexes[j]).val()
@@ -824,8 +813,5 @@
 		});
 
 	};
-
-
-
 
 })(jQuery);
